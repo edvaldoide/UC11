@@ -112,7 +112,7 @@ public class ProdutosDAO {
 
             //Vamos criar um objeto do tipo List
             //Faça a importação do ArrayList
-            ArrayList<ProdutosDTO> listagemVendido = new ArrayList<>();
+            ArrayList<ProdutosDTO> listagemVendidos = new ArrayList<>();
             //percorrer o resultSet e salvar as informações dentro de uma variável "Empresa"
             //Depois salva esse objeto dentro da lista
 
@@ -125,11 +125,11 @@ public class ProdutosDAO {
                 produtoVendido.setValor(rs.getInt("valor"));
                 produtoVendido.setStatus(rs.getString("status"));
                 //Adicionando os elementos na lista criada
-                listagemVendido.add(produtoVendido);
+                listagemVendidos.add(produtoVendido);
 
             }
             //Após finalizar o while, o retorno será a listaEmpresas, onde cada posição é um registro do banco de dados
-            return listagemVendido;
+            return listagemVendidos;
 
             //Se o método entrar no "Catch" quer dizer que não encontrou nenhuma empresa, então damos um "return null"
         } catch (Exception e) {
