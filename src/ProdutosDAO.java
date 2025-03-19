@@ -99,4 +99,43 @@ public class ProdutosDAO {
         }
     }
 
+    public ArrayList<ProdutosDTO> listarProdutosVendidos() {
+
+        conn = new conectaDAO().connectDB();
+
+        String sql = "SELECT * FROM produtos WHERE status = 'Vendido'";
+
+        try {
+            PreparedStatement stmt = this.conn.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+
+            //Vamos criar um objeto do tipo List
+            //Faça a importação do ArrayList
+            ArrayList<ProdutosDTO> listagemVendidos = new ArrayList<>();
+            //percorrer o resultSet e salvar as informações dentro de uma variável "Empresa"
+            //Depois salva esse objeto dentro da lista
+
+            //Estrutura de repetição While
+            while (rs.next()) { //.next retorna verdadeiro caso exista uma próxima posição dentro do array
+                ProdutosDTO produtoVendido = new ProdutosDTO();
+                //Salvar dentro do objeto empresa as informações            
+                produtoVendido.setId(rs.getInt("id"));
+                produtoVendido.setNome(rs.getString("nome"));
+                produtoVendido.setValor(rs.getInt("valor"));
+                produtoVendido.setStatus(rs.getString("status"));
+                //Adicionando os elementos na lista criada
+                listagemVendidos.add(produtoVendido);
+
+            }
+            //Após finalizar o while, o retorno será a listaEmpresas, onde cada posição é um registro do banco de dados
+            return listagemVendidos;
+
+            //Se o método entrar no "Catch" quer dizer que não encontrou nenhuma empresa, então damos um "return null"
+        } catch (Exception e) {
+            return null;
+        }
+
+    }
+
 }
